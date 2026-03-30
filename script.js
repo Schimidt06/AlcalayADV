@@ -1,5 +1,6 @@
 /* =============================================
    ALCALAY ADV — PREMIUM JAVASCRIPT
+   Dark + Gold | Bank Debt Law Firm
 ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,9 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('load', () => {
     setTimeout(() => {
       preloader.classList.add('fade-out');
-      setTimeout(() => preloader.remove(), 700);
+      setTimeout(() => preloader.remove(), 900);
       initAOS();
-    }, 800);
+    }, 1000);
   });
 
   /* ========================
@@ -33,15 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const animate = () => {
-      followerX += (mouseX - followerX) * 0.12;
-      followerY += (mouseY - followerY) * 0.12;
+      followerX += (mouseX - followerX) * 0.1;
+      followerY += (mouseY - followerY) * 0.1;
       follower.style.left = followerX + 'px';
       follower.style.top  = followerY + 'px';
       requestAnimationFrame(animate);
     };
     animate();
 
-    document.querySelectorAll('a, button, .servico-card, .mercado-card').forEach(el => {
+    document.querySelectorAll('a, button, .servico-card, .numero-item, .problema-item, .depoimento-card').forEach(el => {
       el.addEventListener('mouseenter', () => {
         cursor.classList.add('hovered');
         follower.classList.add('hovered');
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenu.classList.toggle('open');
     });
 
-    document.querySelectorAll('.mobile-link').forEach(link => {
+    document.querySelectorAll('.mobile-link, .mobile-whatsapp').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');
         mobileMenu.classList.remove('open');
@@ -106,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
-        const offset = header ? header.offsetHeight : 0;
+        const offset = 80; // Fixed offset for premium header
         window.scrollTo({
           top: target.getBoundingClientRect().top + window.scrollY - offset,
           behavior: 'smooth'
@@ -116,85 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ========================
-     HERO CANVAS — Particle Field
-  ========================= */
-  const canvas = document.getElementById('hero-canvas');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let w, h;
-
-    const resize = () => {
-      w = canvas.width  = canvas.offsetWidth;
-      h = canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    const PARTICLE_COUNT = 80;
-    const GOLD = 'rgba(201,168,76,';
-    const BLUE = 'rgba(50,130,220,';
-
-    class Particle {
-      constructor() { this.reset(); }
-      reset() {
-        this.x  = Math.random() * w;
-        this.y  = Math.random() * h;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = (Math.random() - 0.5) * 0.4;
-        this.r  = Math.random() * 1.4 + 0.4;
-        this.alpha = Math.random() * 0.5 + 0.1;
-        this.color = Math.random() > 0.65 ? GOLD : BLUE;
-        this.life  = 0;
-        this.maxLife = 300 + Math.random() * 400;
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.life++;
-        if (this.life > this.maxLife || this.x < 0 || this.x > w || this.y < 0 || this.y > h) {
-          this.reset();
-        }
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = this.color + this.alpha + ')';
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
-
-    const drawConnections = () => {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            const alpha = (1 - dist / 120) * 0.12;
-            ctx.strokeStyle = `rgba(201,168,76,${alpha})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-    };
-
-    const heroLoop = () => {
-      ctx.clearRect(0, 0, w, h);
-      particles.forEach(p => { p.update(); p.draw(); });
-      drawConnections();
-      requestAnimationFrame(heroLoop);
-    };
-    heroLoop();
-  }
-
-  /* ========================
      AOS — Scroll Animations
   ========================= */
   function initAOS() {
@@ -202,14 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const delay = parseInt(entry.target.getAttribute('data-aos-delay') || 0);
+          const delay = parseInt(entry.target.getAttribute('data-aos-delay') || 50);
           setTimeout(() => {
             entry.target.classList.add('aos-animate');
           }, delay);
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
 
     elements.forEach(el => observer.observe(el));
   }
@@ -226,14 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
           counterObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.4 });
 
     counters.forEach(c => counterObserver.observe(c));
   }
 
   function animateCounter(el) {
     const target = parseInt(el.getAttribute('data-target'));
-    const duration = 1800;
+    const duration = 2000;
     const start = performance.now();
     const easeOut = t => 1 - Math.pow(1 - t, 3);
 
@@ -247,47 +169,76 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ========================
-     TESTIMONIAL SLIDER
+     TESTIMONIAL — MOBILE CAROUSEL
   ========================= */
-  const track = document.getElementById('depoimento-track');
+  const depoGrid = document.querySelector('.depoimentos-grid');
   const dotsContainer = document.getElementById('depo-dots');
   const prevBtn = document.getElementById('depo-prev');
   const nextBtn = document.getElementById('depo-next');
+  const depoControls = document.querySelector('.depo-controls');
 
-  if (track) {
-    const cards = track.querySelectorAll('.depoimento-card');
+  if (depoGrid) {
+    const cards = Array.from(depoGrid.querySelectorAll('.depoimento-card'));
     let current = 0;
-    const total = cards.length;
-    const visibleCount = window.innerWidth <= 900 ? 1 : 2;
+    let isMobile = window.innerWidth <= 900;
 
     // Create dots
-    const maxIndex = Math.max(0, total - visibleCount);
-    for (let i = 0; i <= maxIndex; i++) {
-      const dot = document.createElement('div');
-      dot.classList.add('depo-dot');
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => goTo(i));
-      dotsContainer.appendChild(dot);
-    }
+    const buildDots = () => {
+      dotsContainer.innerHTML = '';
+      if (!isMobile) return;
+      cards.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.classList.add('depo-dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      });
+    };
 
     const goTo = (idx) => {
-      current = Math.max(0, Math.min(idx, maxIndex));
-      const cardWidth = cards[0].offsetWidth + 28;
-      track.style.transform = `translateX(-${current * cardWidth}px)`;
+      if (!isMobile) return;
+      current = Math.max(0, Math.min(idx, cards.length - 1));
+      cards.forEach((card, i) => {
+        card.style.display = i === current ? 'block' : 'none';
+      });
       dotsContainer.querySelectorAll('.depo-dot').forEach((d, i) => {
         d.classList.toggle('active', i === current);
       });
     };
 
+    const activateMobile = () => {
+      isMobile = true;
+      depoGrid.classList.add('mobile-active');
+      depoGrid.style.display = 'flex';
+      depoGrid.style.flexDirection = 'column';
+      if (depoControls) depoControls.style.display = 'flex';
+      buildDots();
+      goTo(0);
+    };
+
+    const deactivateMobile = () => {
+      isMobile = false;
+      depoGrid.style.display = '';
+      cards.forEach(card => card.style.display = '');
+      dotsContainer.innerHTML = '';
+      if (depoControls) depoControls.style.display = '';
+    };
+
+    const checkMobile = () => {
+      if (window.innerWidth <= 900 && !isMobile) activateMobile();
+      else if (window.innerWidth > 900 && isMobile) deactivateMobile();
+    };
+
+    window.addEventListener('resize', checkMobile);
+    checkMobile();
+
     if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
     if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
 
-    // Auto slide
-    let autoSlide = setInterval(() => goTo(current >= maxIndex ? 0 : current + 1), 5000);
-    track.addEventListener('mouseenter', () => clearInterval(autoSlide));
-    track.addEventListener('mouseleave', () => {
-      autoSlide = setInterval(() => goTo(current >= maxIndex ? 0 : current + 1), 5000);
-    });
+    // Auto slide on mobile
+    let autoSlide = setInterval(() => {
+      if (isMobile) goTo(current >= cards.length - 1 ? 0 : current + 1);
+    }, 5000);
   }
 
   /* ========================
@@ -301,15 +252,18 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const btn = document.getElementById('form-submit');
       btn.disabled = true;
-      btn.querySelector('span').textContent = 'Enviando...';
+      const span = btn.querySelector('span');
+      const originalText = span.textContent;
+      span.textContent = 'Enviando...';
 
-      // Simulate sending (replace with real API call)
       setTimeout(() => {
         form.querySelectorAll('input, select, textarea').forEach(f => f.value = '');
         btn.disabled = false;
-        btn.querySelector('span').textContent = 'Enviar Mensagem';
-        if (formSuccess) formSuccess.classList.add('show');
-        setTimeout(() => formSuccess && formSuccess.classList.remove('show'), 6000);
+        span.textContent = originalText;
+        if (formSuccess) {
+          formSuccess.classList.add('show');
+          setTimeout(() => formSuccess.classList.remove('show'), 6000);
+        }
       }, 1400);
     });
   }
@@ -340,16 +294,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const wppFloat = document.getElementById('whatsapp-float');
   if (wppFloat) {
     wppFloat.style.opacity = '0';
-    wppFloat.style.transform = 'scale(0.7)';
-    wppFloat.style.transition = 'opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s';
+    wppFloat.style.transform = 'scale(0.7) translateY(10px)';
+    wppFloat.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s';
 
     const showWpp = () => {
-      if (window.scrollY > 300) {
+      if (window.scrollY > 400) {
         wppFloat.style.opacity = '1';
-        wppFloat.style.transform = 'scale(1)';
+        wppFloat.style.transform = 'scale(1) translateY(0)';
       } else {
         wppFloat.style.opacity = '0';
-        wppFloat.style.transform = 'scale(0.7)';
+        wppFloat.style.transform = 'scale(0.7) translateY(10px)';
       }
     };
     window.addEventListener('scroll', showWpp, { passive: true });
@@ -362,16 +316,51 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-link');
 
   const highlightNav = () => {
-    let current = '';
+    let currentSection = '';
     sections.forEach(sec => {
-      if (window.scrollY >= sec.offsetTop - 200) {
-        current = sec.getAttribute('id');
+      if (window.scrollY >= sec.offsetTop - 180) {
+        currentSection = sec.getAttribute('id');
       }
     });
     navLinks.forEach(link => {
-      link.style.color = link.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+      const isActive = link.getAttribute('href') === '#' + currentSection;
+      link.style.color = isActive ? 'var(--gold)' : '';
     });
   };
   window.addEventListener('scroll', highlightNav, { passive: true });
+
+  /* ========================
+     HERO — Subtle parallax on image
+  ========================= */
+  const heroRight = document.querySelector('.hero-right');
+  if (heroRight) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const heroImg = heroRight.querySelector('.hero-img');
+      if (heroImg && scrolled < window.innerHeight) {
+        heroImg.style.transform = `translateY(${scrolled * 0.15}px)`;
+      }
+    }, { passive: true });
+  }
+
+  /* ========================
+     GOLD LINE SEPARATOR ANIMATION
+  ========================= */
+  const lineElements = document.querySelectorAll('.sobre-line-deco, .eyebrow-line');
+  if (lineElements.length) {
+    const lineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          lineObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    lineElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transition = 'opacity 1s ease';
+      lineObserver.observe(el);
+    });
+  }
 
 });
