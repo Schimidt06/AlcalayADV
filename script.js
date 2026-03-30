@@ -18,21 +18,19 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================================== */
     const header = document.getElementById('header');
     
+    const darkSections = document.querySelectorAll('.dark-section');
+
     const handleScroll = () => {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
-            
-            // Verifica se está na sessão escura (Areas de Atuação)
-            const darkSection = document.querySelector('.dark-section');
-            if (darkSection) {
-                const rect = darkSection.getBoundingClientRect();
-                // Se o dark section estive cobrindo o header
-                if (rect.top <= 50 && rect.bottom >= 50) {
-                    header.classList.add('dark-mode');
-                } else {
-                    header.classList.remove('dark-mode');
-                }
-            }
+
+            let overDark = false;
+            darkSections.forEach((section) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 50 && rect.bottom >= 50) overDark = true;
+            });
+            if (overDark) header.classList.add('dark-mode');
+            else header.classList.remove('dark-mode');
         } else {
             header.classList.remove('scrolled', 'dark-mode');
         }
@@ -48,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSlides = document.querySelectorAll('.hero-bg-slide');
     const heroSegmentText = document.querySelector('.hero-segment-text');
     let heroSlideIndex = 0;
-    const heroSlideIntervalMs = 7000;
+    const heroSlideIntervalMs = 3000; // Troca a cada 3 segundos conforme solicitado
 
     if (heroSlides.length > 1 && heroSegmentText) {
         const rotateHero = () => {
