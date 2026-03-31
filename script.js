@@ -142,4 +142,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    /* ==========================================================================
+       Projects Tabs (Abas)
+       ========================================================================== */
+    const tabButtons = document.querySelectorAll('.tab-button[data-project-tab]');
+    const tabPanels = document.querySelectorAll('.tab-panel[data-project-panel]');
+
+    const setActiveTab = (tabName) => {
+        tabButtons.forEach((btn) => {
+            const isActive = btn.dataset.projectTab === tabName;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-selected', String(isActive));
+        });
+
+        tabPanels.forEach((panel) => {
+            const isActive = panel.dataset.projectPanel === tabName;
+            panel.classList.toggle('active', isActive);
+        });
+    };
+
+    if (tabButtons.length && tabPanels.length) {
+        tabButtons.forEach((btn) => {
+            btn.addEventListener('click', () => setActiveTab(btn.dataset.projectTab));
+        });
+    }
+
 });
