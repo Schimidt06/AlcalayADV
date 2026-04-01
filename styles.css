@@ -1001,33 +1001,23 @@ body.loaded .preloader {
 }
 
 .project-thumb--doabem {
-    background: #14141a;
+    background: #14141a url('images/doabem-preview.png') no-repeat center;
+    background-size: cover;
 }
 
 .project-thumb--doabem::before {
-    background: radial-gradient(circle at 20% 20%, rgba(184, 144, 80, 0.60), transparent 45%),
-        radial-gradient(circle at 60% 35%, rgba(120, 180, 255, 0.35), transparent 50%),
-        linear-gradient(135deg, rgba(20, 20, 26, 0.95), rgba(20, 20, 26, 0.55));
+    background: radial-gradient(circle at 20% 20%, rgba(184, 144, 80, 0.40), transparent 45%),
+        linear-gradient(135deg, rgba(20, 20, 26, 0.85), rgba(20, 20, 26, 0.45));
 }
 
 .project-thumb--bemaverbado {
-    background: #101217;
+    background: #101217 url('images/bemaverbado-preview.png') no-repeat center;
+    background-size: cover;
 }
 
 .project-thumb--bemaverbado::before {
-    background: radial-gradient(circle at 20% 20%, rgba(184, 144, 80, 0.56), transparent 45%),
-        radial-gradient(circle at 65% 45%, rgba(180, 120, 255, 0.25), transparent 55%),
-        linear-gradient(135deg, rgba(16, 18, 23, 0.95), rgba(16, 18, 23, 0.55));
-}
-
-.project-thumb--alcalayadv {
-    background: #0f1117;
-}
-
-.project-thumb--alcalayadv::before {
-    background: radial-gradient(circle at 20% 20%, rgba(184, 144, 80, 0.60), transparent 45%),
-        radial-gradient(circle at 70% 45%, rgba(255, 255, 255, 0.12), transparent 50%),
-        linear-gradient(135deg, rgba(15, 17, 23, 0.95), rgba(15, 17, 23, 0.55));
+    background: radial-gradient(circle at 20% 20%, rgba(184, 144, 80, 0.40), transparent 45%),
+        linear-gradient(135deg, rgba(16, 18, 23, 0.85), rgba(16, 18, 23, 0.45));
 }
 
 .project-content .project-title {
