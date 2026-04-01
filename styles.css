@@ -493,17 +493,17 @@ body.loaded .preloader {
 
 /* Agro | metrópole (NYC) | indústria & tecnologia — imagens locais */
 .hero-bg-slide--agro {
-    background-image: url('images/bg-agro.jpg');
+    background-image: url('images/bg-agro.png');
     background-position: center 40%;
 }
 
 .hero-bg-slide--city {
-    background-image: url('images/bg-city.jpg');
+    background-image: url('images/bg-city.png');
     background-position: center center;
 }
 
 .hero-bg-slide--industry {
-    background-image: url('images/bg-industry.jpg');
+    background-image: url('images/bg-industry.png');
     background-position: center center;
 }
 
